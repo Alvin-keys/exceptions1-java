@@ -29,6 +29,8 @@ public class Program {
 		else if (checkin.isBefore(now) || checkout.isBefore(now)) {
 			System.out.println("Error in reservation: Reservation dates for update must be future dates");
 		}
+		
+		// A lógica ainda está na camada de aplicação. Regra de negócio não deve ficar na camada de aplicação.
 		else {
 			Reservation reservation = new Reservation(roomnumber, checkin, checkout);
 			System.out.println("Reservation: "+ reservation);
@@ -51,9 +53,9 @@ public class Program {
 				System.out.println("Reservation: "+ reservation);
 			}
 
+		}
+		
 		sc.close();
-
-	}
 
 	}
 }
