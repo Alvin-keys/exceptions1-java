@@ -11,7 +11,6 @@ public class Reservation {
 	private LocalDate checkin;
 	private LocalDate checkout;
 	
-	
 	public Reservation() {	
 	}
 	
@@ -41,9 +40,20 @@ public class Reservation {
 		return ChronoUnit.DAYS.between(checkin,checkout); //mais seguro que Period
 	}
 	
-	public void updateDates(LocalDate checkin, LocalDate checkout) {
+	public String updateDates(LocalDate checkin, LocalDate checkout) {
+		//Lógica de Negócio veio para classe Reservation	
+		
+		LocalDate now = LocalDate.now();
+		if (checkin.isBefore(now) || checkout.isBefore(now)) {
+			return "Error in reservation: Reservation dates for update must be future dates";
+		}
+		if (!checkout.isAfter(checkin)) {
+			return"Error in reservation: Check-out date must be after check-in date";
+		}
+		
 		this.checkin = checkin;
 		this.checkout = checkout;
+		return null;//Se retornar 'null' não houve erro.
 	}
 	
 	@Override
