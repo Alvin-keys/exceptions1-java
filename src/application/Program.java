@@ -6,15 +6,17 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Reservation;
+import model.entities.ReservationException;
 
 public class Program {
 
-	public static void main(String[] args) {
-		Locale.setDefault(Locale.US);
-		Scanner sc = new Scanner(System.in);
-		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		
-		try {
+    public static void main(String[] args) {
+
+        Locale.setDefault(Locale.US);
+        Scanner sc = new Scanner(System.in);
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        try {
             System.out.print("Room number: ");
             int roomNumber = sc.nextInt();
             sc.nextLine();
@@ -25,8 +27,10 @@ public class Program {
             System.out.print("Check-out date (dd/MM/yyyy): ");
             LocalDate checkout = LocalDate.parse(sc.nextLine(), fmt);
 
-            Reservation reservation =
-                    new Reservation(roomNumber, checkin, checkout);
+            // Validação antes de criar o objeto Reservation
+            Reservation.validateDates(checkin, checkout);
+
+            Reservation reservation = new Reservation(roomNumber, checkin, checkout);
 
             System.out.println();
             System.out.println("Reservation: " + reservation);
@@ -40,6 +44,7 @@ public class Program {
             System.out.print("Check-out date (dd/MM/yyyy): ");
             checkout = LocalDate.parse(sc.nextLine(), fmt);
 
+            // Atualização e validação via método de instância
             reservation.updateDates(checkin, checkout);
 
             System.out.println();
@@ -47,11 +52,10 @@ public class Program {
 
         } catch (ReservationException e) {
             System.out.println("Error in reservation: " + e.getMessage());
+        }
 
-        } 
-		
-		sc.close();
-	}
+        sc.close();
+    }
 }
 
 //O Program deve apenas: ler dados, criar objeto, chamar métodos, tratar erros(try-catch), mostrar resultado.
