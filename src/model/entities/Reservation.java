@@ -37,11 +37,13 @@ public class Reservation {
 	}
 	
 	public Long duration() {	
-		return ChronoUnit.DAYS.between(checkin,checkout); //mais seguro que Period
+		return ChronoUnit.DAYS.between(checkin,checkout); //mais seguro que Period.
 	}
 	
 	public String updateDates(LocalDate checkin, LocalDate checkout) {
-		//Lógica de Negócio veio para classe Reservation	
+		//Lógica de Negócio veio para classe Reservation!	
+		//Interação com tela(ex: print) é responsabilidade da view, da aplicação, do program.
+		//Não print aqui na classe de domínio, lance uma exceção.
 		
 		LocalDate now = LocalDate.now();
 		if (checkin.isBefore(now) || checkout.isBefore(now)) {

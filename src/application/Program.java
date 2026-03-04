@@ -56,5 +56,5 @@ public class Program {
 	}
 }
 
-//O Program deve apenas: ler dados, criar objeto, chamar métodos, tratar erros, mostrar resultado.
+//O Program deve apenas: ler dados, criar objeto, chamar métodos, tratar erros(try-catch), mostrar resultado.
 //Quem sabe se uma reserva é válida é a classe Reservation.
