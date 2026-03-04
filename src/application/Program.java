@@ -23,6 +23,7 @@ public class Program {
 		LocalDate checkout = LocalDate.parse(sc.nextLine(),fmt);
 		LocalDate now = LocalDate.now();
 		
+		//Lógica de Negócio(Deve ir para o construtor da classe reservation)
 		if(!checkout.isAfter(checkin)) {
 			System.out.println("Error in reservation: Check-out date must be after check-in date");
 		}
@@ -31,6 +32,8 @@ public class Program {
 		}
 		
 		// A lógica ainda está na camada de aplicação. Regra de negócio não deve ficar na camada de aplicação.
+		//O Program deve apenas: ler dados, criar objeto, chamar métodos, tratar erros, mostrar resultado.
+		//Quem sabe se uma reserva é válida é a classe Reservation.
 		else {
 			Reservation reservation = new Reservation(roomnumber, checkin, checkout);
 			System.out.println("Reservation: "+ reservation);
@@ -41,7 +44,8 @@ public class Program {
 			checkin = LocalDate.parse(sc.nextLine(),fmt);//Reaproveita a mesma variável.
 			System.out.print("Check-out date (dd/MM/yyyy): ");
 			checkout = LocalDate.parse(sc.nextLine(),fmt);
-			
+		
+		//Lógica de Negócio(Deve ir para a classe Reservation)	
 			if (checkin.isBefore(now) || checkout.isBefore(now)) {
 				System.out.println("Error in reservation: Reservation dates for update must be future dates");
 			}
