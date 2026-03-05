@@ -1,10 +1,10 @@
 package model.entities;
 
-import model.entities.ReservationException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+
+import model.entities.exceptions.ReservationException;
 
 public class Reservation {
     DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -16,7 +16,7 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(Integer roomNumber, LocalDate checkin, LocalDate checkout) {
+    public Reservation(Integer roomNumber, LocalDate checkin, LocalDate checkout) throws ReservationException {
         validateDates(checkin, checkout);
         this.roomNumber = roomNumber;
         this.checkin = checkin;
@@ -43,14 +43,14 @@ public class Reservation {
         return ChronoUnit.DAYS.between(checkin,checkout); //mais seguro que Period.
     }
 
-    public String updateDates(LocalDate checkin, LocalDate checkout) {
+    public String updateDates(LocalDate checkin, LocalDate checkout) throws ReservationException {
         validateDates(checkin, checkout);
         this.checkin = checkin;
         this.checkout = checkout;
         return null;
     }
 
-    public static void validateDates(LocalDate checkin, LocalDate checkout) {
+    public static void validateDates(LocalDate checkin, LocalDate checkout) throws ReservationException {
         LocalDate now = LocalDate.now();
         if (checkin.isBefore(now) || checkout.isBefore(now)) {
             throw new ReservationException("Reservation dates for update must be future dates");
@@ -75,4 +75,6 @@ public class Reservation {
                 +" nights";
 
     }
+    
+}
 

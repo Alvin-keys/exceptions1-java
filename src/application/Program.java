@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Reservation;
-import model.entities.ReservationException;
+import model.entities.exceptions.ReservationException;
 
 public class Program {
 
