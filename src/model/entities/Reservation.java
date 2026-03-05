@@ -43,11 +43,10 @@ public class Reservation {
         return ChronoUnit.DAYS.between(checkin,checkout); //mais seguro que Period.
     }
 
-    public String updateDates(LocalDate checkin, LocalDate checkout) throws ReservationException {
+    public void updateDates(LocalDate checkin, LocalDate checkout) throws ReservationException {
         validateDates(checkin, checkout);
         this.checkin = checkin;
         this.checkout = checkout;
-        return null;
     }
 
     public static void validateDates(LocalDate checkin, LocalDate checkout) throws ReservationException {
