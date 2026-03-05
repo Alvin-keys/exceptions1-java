@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-import model.entities.exceptions.ReservationException;
+import model.exceptions.ReservationException;
 
 public class Reservation {
     DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");

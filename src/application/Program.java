@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Reservation;
-import model.entities.exceptions.ReservationException;
+import model.exceptions.ReservationException;
 
 public class Program {
 
@@ -27,7 +27,7 @@ public class Program {
             System.out.print("Check-out date (dd/MM/yyyy): ");
             LocalDate checkout = LocalDate.parse(sc.nextLine(), fmt);
 
-            // Validação antes de criar o objeto Reservation
+            // Validação com método estático antes de criar o objeto Reservation
             Reservation.validateDates(checkin, checkout);
 
             Reservation reservation = new Reservation(roomNumber, checkin, checkout);
@@ -51,7 +51,8 @@ public class Program {
             System.out.println("Reservation: " + reservation);
 
         } catch (ReservationException e) {
-            System.out.println("Error in reservation: " + e.getMessage());
+        	//getMessage() retorna exatamente a mensagem que foi enviada no super(message).
+            System.out.println("Error in reservation: " + e.getMessage());// 
         }
 
         sc.close();
@@ -60,3 +61,4 @@ public class Program {
 
 //O Program deve apenas: ler dados, criar objeto, chamar métodos, tratar erros(try-catch), mostrar resultado.
 //Quem sabe se uma reserva é válida é a classe Reservation.
+//Se eu não tratar a exceção no método, preciso usar 'Throws' para propagar o erro e subir ele na pilha de chamadas.
